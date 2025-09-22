@@ -1,0 +1,14 @@
+C:\Users\Administrador\source\repos\Aula07\Aula07\bin\Debug\net9.0\Aula07.exe
+C:\Users\Administrador\source\repos\Aula07\Aula07\bin\Debug\net9.0\Aula07.deps.json
+C:\Users\Administrador\source\repos\Aula07\Aula07\bin\Debug\net9.0\Aula07.runtimeconfig.json
+C:\Users\Administrador\source\repos\Aula07\Aula07\bin\Debug\net9.0\Aula07.dll
+C:\Users\Administrador\source\repos\Aula07\Aula07\bin\Debug\net9.0\Aula07.pdb
+C:\Users\Administrador\source\repos\Aula07\Aula07\obj\Debug\net9.0\Aula07.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrador\source\repos\Aula07\Aula07\obj\Debug\net9.0\Aula07.AssemblyInfoInputs.cache
+C:\Users\Administrador\source\repos\Aula07\Aula07\obj\Debug\net9.0\Aula07.AssemblyInfo.cs
+C:\Users\Administrador\source\repos\Aula07\Aula07\obj\Debug\net9.0\Aula07.csproj.CoreCompileInputs.cache
+C:\Users\Administrador\source\repos\Aula07\Aula07\obj\Debug\net9.0\Aula07.dll
+C:\Users\Administrador\source\repos\Aula07\Aula07\obj\Debug\net9.0\refint\Aula07.dll
+C:\Users\Administrador\source\repos\Aula07\Aula07\obj\Debug\net9.0\Aula07.pdb
+C:\Users\Administrador\source\repos\Aula07\Aula07\obj\Debug\net9.0\Aula07.genruntimeconfig.cache
+C:\Users\Administrador\source\repos\Aula07\Aula07\obj\Debug\net9.0\ref\Aula07.dll
