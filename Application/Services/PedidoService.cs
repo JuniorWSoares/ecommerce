@@ -34,12 +34,18 @@ namespace ecommerce.Application.Services
             {
                 var produto = _produtoRepo.ObterPorId(itemCarrinho.ProdutoId);
 
-                // Valida e baixa estoque (Critério: Exceções de Domínio)
+                // CORREÇÃO DO AVISO CS8602:
+                // Validamos se o produto existe antes de mexer nele.
+                if (produto == null)
+                {
+                    throw new InvalidOperationException($"O produto '{itemCarrinho.ProdutoNome}' não foi encontrado no cadastro.");
+                }
+
+                // Agora o compilador sabe que 'produto' não é nulo aqui
                 produto.BaixarEstoque(itemCarrinho.Quantidade);
 
                 pedido.AdicionarItem(produto.Id, produto.Nome, itemCarrinho.Quantidade, produto.Preco);
 
-                // Salvar o novo saldo de estoque
                 _produtoRepo.Atualizar(produto);
             }
 
