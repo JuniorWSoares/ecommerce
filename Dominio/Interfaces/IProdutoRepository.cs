@@ -1,10 +1,15 @@
-﻿using Dominio.Entidades;
+﻿using System;
+using System.Collections.Generic;
+using ecommerce.Dominio.Entidades;
 
-namespace Dominio.Interfaces
+namespace ecommerce.Dominio.Interfaces
 {
     public interface IProdutoRepository
     {
-        void Incluir(Produto produto);
-        List<Produto> Listar();
+        void Adicionar(Produto produto);
+        void Atualizar(Produto produto);
+        void Remover(Guid id); 
+        Produto ObterPorId(Guid id);
+        List<Produto> ListarTodos();
     }
 }

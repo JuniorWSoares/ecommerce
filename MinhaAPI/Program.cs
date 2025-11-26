@@ -1,24 +1,51 @@
-using Application;
-using Dominio.Interfaces;
-using Infraestrutura.Repositorios;
+using ecommerce.Infraestrutura.Data;
+using ecommerce.Infraestrutura.Repositorios;
+using ecommerce.Dominio.Interfaces;
+using ecommerce.Application.Services;
 
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddScoped<ProdutosService>();
-builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
-
-
+// ==================================================================
+// 1. CONFIGURAÇÃO DA API
+// ==================================================================
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
+// ==================================================================
+// 2. PERSISTÊNCIA (SIMULAÇÃO)
+// ==================================================================
+// AddSingleton é CRÍTICO aqui. Ele garante que a lista de dados
+// fique viva na memória RAM enquanto a API estiver rodando.
+builder.Services.AddSingleton<AppDbContext>();
+
+// ==================================================================
+// 3. INJEÇÃO DE DEPENDÊNCIA - REPOSITÓRIOS (INFRASTRUCTURE)
+// ==================================================================
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>(); // <--- NOVO
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<ICarrinhoRepository, CarrinhoRepository>();
+builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
+
+// ==================================================================
+// 4. INJEÇÃO DE DEPENDÊNCIA - SERVICES (APPLICATION)
+// ==================================================================
+builder.Services.AddScoped<UsuarioService>();
+builder.Services.AddScoped<CategoriaService>(); // <--- NOVO
+builder.Services.AddScoped<ProdutoService>();
+builder.Services.AddScoped<CarrinhoService>();
+builder.Services.AddScoped<PedidoService>();
+
+// ==================================================================
+// 5. CONSTRUÇÃO E PIPELINE
+// ==================================================================
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
