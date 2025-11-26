@@ -6,15 +6,15 @@ namespace ecommerce.Dominio.Entidades
     {
         public Guid Id { get; private set; }
         public Guid CategoriaId { get; private set; }
-        public string Nome { get; private set; }
-        public string Descricao { get; private set; }
+        public string Nome { get; private set; } = null!;
+        public string Descricao { get; private set; } = null!;
         public decimal Preco { get; private set; }
         public DateTime DataCadastro { get; private set; }
-        public string Status { get; private set; }
+        public string Status { get; private set; } = null!;
         public int QuantidadeEstoque { get; private set; }
 
         // Navegação
-        public Categoria Categoria { get; private set; }
+        public Categoria Categoria { get; private set; } = null!;
 
         public Produto(string nome, string descricao, decimal preco, Guid categoriaId, int estoqueInicial)
         {

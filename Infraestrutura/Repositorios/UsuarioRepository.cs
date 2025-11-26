@@ -34,12 +34,12 @@ namespace ecommerce.Infraestrutura.Repositorios
             }
         }
 
-        public Usuario ObterPorEmail(string email)
+        public Usuario? ObterPorEmail(string email)
         {
             return _context.Usuarios.FirstOrDefault(u => u.Email == email);
         }
 
-        public Usuario ObterPorId(Guid id)
+        public Usuario? ObterPorId(Guid id)
         {
             return _context.Usuarios.FirstOrDefault(u => u.Id == id);
         }

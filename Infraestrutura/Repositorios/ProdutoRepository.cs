@@ -36,7 +36,7 @@ namespace ecommerce.Infraestrutura.Repositorios
         }
 
         // Chamamos o preenchimento antes de retornar
-        public Produto ObterPorId(Guid id)
+        public Produto? ObterPorId(Guid id)
         {
             var produto = _context.Produtos.FirstOrDefault(p => p.Id == id);
 

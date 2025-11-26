@@ -4,8 +4,8 @@ namespace ecommerce.Dominio.Entidades
 {
     public class PagamentoPix : Pagamento
     {
-        public string ChavePix { get; private set; }
-        public string CodigoCopiaCola { get; private set; }
+        public string ChavePix { get; private set; } = null!;
+        public string CodigoCopiaCola { get; private set; } = null!;
 
         public PagamentoPix(Guid pedidoId, decimal valor, string chavePix)
             : base(pedidoId, valor)

@@ -39,7 +39,7 @@ namespace ecommerce.Infraestrutura.Repositorios
             }
         }
 
-        public Categoria ObterPorId(Guid id)
+        public Categoria? ObterPorId(Guid id)
         {
             return _context.Categorias.FirstOrDefault(c => c.Id == id);
         }

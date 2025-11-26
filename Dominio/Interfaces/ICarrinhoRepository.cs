@@ -6,7 +6,7 @@ namespace ecommerce.Dominio.Interfaces
     public interface ICarrinhoRepository
     {
         // O carrinho é sempre buscado pelo dono (Usuario)
-        Carrinho ObterCarrinhoDoUsuario(Guid usuarioId);
+        Carrinho? ObterCarrinhoDoUsuario(Guid usuarioId);
 
         void Adicionar(Carrinho carrinho);
 

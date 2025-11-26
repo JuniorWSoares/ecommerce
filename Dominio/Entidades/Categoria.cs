@@ -7,8 +7,8 @@ namespace ecommerce.Dominio.Entidades
     {
         // Propriedades com 'private set' para garantir Encapsulamento 
         public Guid Id { get; private set; }
-        public string Nome { get; private set; }
-        public string Descricao { get; private set; }
+        public string Nome { get; private set; } = null!; 
+        public string Descricao { get; private set; } = null!;
 
         // Propriedade de navegação (relacionamento do diagrama)
         public ICollection<Produto> Produtos { get; private set; }

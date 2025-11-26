@@ -7,21 +7,20 @@ namespace ecommerce.Dominio.Entidades
     {
         public Guid Id { get; private set; }
 
-        // Dados Pessoais
-        public string Nome { get; private set; }
-        public string Email { get; private set; }
-        public string Senha { get; private set; }
-        public string Telefone { get; private set; }
+        public string Nome { get; private set; } = null!;
+        public string Email { get; private set; } = null!;
+        public string Senha { get; private set; } = null!;
+        public string Telefone { get; private set; } = null!;
+        public string TipoUsuario { get; private set; } = null!;
         public DateTime DataCadastro { get; private set; }
-        public string TipoUsuario { get; private set; }
 
-        // Endereço 
-        public string Rua { get; private set; }
-        public string Numero { get; private set; }
-        public string Cidade { get; private set; }
-        public string Estado { get; private set; }
-        public string Cep { get; private set; }
-        public string Complemento { get; private set; }
+        public string Rua { get; private set; } = null!;
+        public string Numero { get; private set; } = null!;
+        public string Cidade { get; private set; } = null!;
+        public string Estado { get; private set; } = null!;
+        public string Cep { get; private set; } = null!;
+
+        public string? Complemento { get; private set; }
 
         protected Usuario() { }
 

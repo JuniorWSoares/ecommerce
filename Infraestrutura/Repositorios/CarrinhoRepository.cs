@@ -15,7 +15,7 @@ namespace ecommerce.Infraestrutura.Repositorios
             _context = context;
         }
 
-        public Carrinho ObterCarrinhoDoUsuario(Guid usuarioId)
+        public Carrinho? ObterCarrinhoDoUsuario(Guid usuarioId)
         {
             return _context.Carrinhos.FirstOrDefault(c => c.UsuarioId == usuarioId);
         }

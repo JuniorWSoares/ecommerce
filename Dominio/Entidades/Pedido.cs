@@ -10,10 +10,10 @@ namespace ecommerce.Dominio.Entidades
         public Guid UsuarioId { get; private set; }
         public DateTime DataPedido { get; private set; }
         public decimal ValorTotal { get; private set; }
-        public string Status { get; private set; }
+        public string Status { get; private set; } = null!;
 
         // Relação com Pagamento
-        public Pagamento Pagamento { get; private set; }
+        public Pagamento? Pagamento { get; private set; }
 
         private readonly List<PedidoItem> _itens;
         public IReadOnlyCollection<PedidoItem> Itens => _itens.AsReadOnly();

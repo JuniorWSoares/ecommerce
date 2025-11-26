@@ -8,7 +8,7 @@ namespace ecommerce.Dominio.Interfaces
         void Adicionar(Usuario usuario);
         void Atualizar(Usuario usuario); 
         void Remover(Guid id);
-        Usuario ObterPorEmail(string email); 
-        Usuario ObterPorId(Guid id);
+        Usuario? ObterPorEmail(string email); 
+        Usuario? ObterPorId(Guid id);
     }
 }

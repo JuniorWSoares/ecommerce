@@ -21,7 +21,7 @@ namespace ecommerce.Infraestrutura.Repositorios
             _context.Pedidos.Add(pedido);
         }
 
-        public Pedido ObterPorId(Guid id)
+        public Pedido? ObterPorId(Guid id)
         {
             return _context.Pedidos.FirstOrDefault(p => p.Id == id);
         }

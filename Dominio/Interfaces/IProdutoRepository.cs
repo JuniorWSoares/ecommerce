@@ -9,7 +9,7 @@ namespace ecommerce.Dominio.Interfaces
         void Adicionar(Produto produto);
         void Atualizar(Produto produto);
         void Remover(Guid id); 
-        Produto ObterPorId(Guid id);
+        Produto? ObterPorId(Guid id);
         List<Produto> ListarTodos();
     }
 }
