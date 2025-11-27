@@ -23,7 +23,7 @@ builder.Services.AddSingleton<AppDbContext>();
 // 3. INJEÇÃO DE DEPENDÊNCIA - REPOSITÓRIOS (INFRASTRUCTURE)
 // ==================================================================
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>(); // <--- NOVO
+builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<ICarrinhoRepository, CarrinhoRepository>();
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
@@ -32,7 +32,7 @@ builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 // 4. INJEÇÃO DE DEPENDÊNCIA - SERVICES (APPLICATION)
 // ==================================================================
 builder.Services.AddScoped<UsuarioService>();
-builder.Services.AddScoped<CategoriaService>(); // <--- NOVO
+builder.Services.AddScoped<CategoriaService>();
 builder.Services.AddScoped<ProdutoService>();
 builder.Services.AddScoped<CarrinhoService>();
 builder.Services.AddScoped<PedidoService>();
