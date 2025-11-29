@@ -19,7 +19,7 @@ namespace ecommerce.Application.Services
             _produtoRepo = produtoRepo;
         }
 
-        public Guid FinalizarPedido(CheckoutDTO dto)
+        public Pedido FinalizarPedido(CheckoutDTO dto)
         {
             // 1. Recuperar Carrinho
             var carrinho = _carrinhoRepo.ObterCarrinhoDoUsuario(dto.UsuarioId);
@@ -51,16 +51,16 @@ namespace ecommerce.Application.Services
 
             // 4. Processar Pagamento (Factory + Polimorfismo)
             Pagamento pagamento = CriarPagamento(dto, pedido.Id, pedido.ValorTotal);
-            pagamento.Processar(); 
+            pagamento.Processar();
 
             // 5. Salvar Tudo
             pedido.VincularPagamento(pagamento);
             _pedidoRepo.Adicionar(pedido);
 
-            // 6. Limpar Carrinho (Pois já virou pedido)
+            // 6. Limpar Carrinho
             _carrinhoRepo.LimparCarrinho(carrinho.Id);
 
-            return pedido.Id;
+            return pedido;
         }
 
         // Factory Method: Decide qual classe filha instanciar (Critério 9)

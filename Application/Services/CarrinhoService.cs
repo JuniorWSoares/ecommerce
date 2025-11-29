@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using ecommerce.Dominio.Entidades;
 using ecommerce.Dominio.Interfaces;
 using ecommerce.Application.DTOs;
@@ -9,55 +11,73 @@ namespace ecommerce.Application.Services
     {
         private readonly ICarrinhoRepository _carrinhoRepo;
         private readonly IProdutoRepository _produtoRepo;
+        private readonly IUsuarioRepository _usuarioRepo; 
 
-        public CarrinhoService(ICarrinhoRepository carrinhoRepo, IProdutoRepository produtoRepo)
+        public CarrinhoService(
+            ICarrinhoRepository carrinhoRepo,
+            IProdutoRepository produtoRepo,
+            IUsuarioRepository usuarioRepo)
         {
             _carrinhoRepo = carrinhoRepo;
             _produtoRepo = produtoRepo;
+            _usuarioRepo = usuarioRepo;
         }
-        
-        // Adiciona um item ao carrinho
+
+        // 1. ADICIONAR ITEM
         public void AdicionarItem(AdicionarItemDTO dto)
         {
-            // 1. Validar se o produto existe
+            // Validação de Integridade: Usuário existe?
+            var usuario = _usuarioRepo.ObterPorId(dto.UsuarioId);
+            if (usuario == null)
+                throw new ArgumentException("Usuário não encontrado.");
+
+            // Validação de Integridade: Produto existe?
             var produto = _produtoRepo.ObterPorId(dto.ProdutoId);
             if (produto == null)
                 throw new ArgumentException("Produto não encontrado.");
 
-            // 2. Buscar Carrinho do Usuário
+            // Lógica do Carrinho
             var carrinho = _carrinhoRepo.ObterCarrinhoDoUsuario(dto.UsuarioId);
 
-            // Se não existir, cria um novo
             if (carrinho == null)
             {
                 carrinho = new Carrinho(dto.UsuarioId);
                 _carrinhoRepo.Adicionar(carrinho);
             }
 
-            // 3. Adicionar Item (A entidade recalcula o total)
             carrinho.AdicionarItem(produto, dto.Quantidade);
-
-            // 4. Salvar atualização
             _carrinhoRepo.Atualizar(carrinho);
         }
 
-        // Permite alterar a quantidade de um item já existente
+        // 2. ATUALIZAR QUANTIDADE
         public void AtualizarItem(Guid usuarioId, Guid produtoId, int novaQuantidade)
         {
-            var carrinho = _carrinhoRepo.ObterCarrinhoDoUsuario(usuarioId);
-            if (carrinho == null) throw new ArgumentException("Carrinho não encontrado.");
+            // Validação de Usuário
+            var usuario = _usuarioRepo.ObterPorId(usuarioId);
+            if (usuario == null)
+                throw new ArgumentException("Usuário não encontrado.");
 
-            // Chama o método da Entidade (Regra de Negócio)
+            var carrinho = _carrinhoRepo.ObterCarrinhoDoUsuario(usuarioId);
+            if (carrinho == null)
+                throw new ArgumentException("Carrinho não encontrado.");
+
+            // Chama o método da Entidade
             carrinho.AtualizarItem(produtoId, novaQuantidade);
 
             _carrinhoRepo.Atualizar(carrinho);
         }
 
-        // Remove um item do carrinho
+        // 3. REMOVER ITEM
         public void RemoverItem(Guid usuarioId, Guid produtoId)
         {
+            // Validação de Usuário
+            var usuario = _usuarioRepo.ObterPorId(usuarioId);
+            if (usuario == null)
+                throw new ArgumentException("Usuário não encontrado.");
+
             var carrinho = _carrinhoRepo.ObterCarrinhoDoUsuario(usuarioId);
-            if (carrinho == null) throw new ArgumentException("Carrinho não encontrado.");
+            if (carrinho == null)
+                throw new ArgumentException("Carrinho não encontrado.");
 
             // Chama o método da Entidade
             carrinho.RemoverItem(produtoId);
@@ -65,14 +85,19 @@ namespace ecommerce.Application.Services
             _carrinhoRepo.Atualizar(carrinho);
         }
 
-        // Método para visualizar o carrinho
+        // 4. VISUALIZAR CARRINHO
         public CarrinhoRespostaDTO ObterCarrinho(Guid usuarioId)
         {
+            // Validação de Usuário
+            var usuario = _usuarioRepo.ObterPorId(usuarioId);
+            if (usuario == null)
+                throw new ArgumentException("Usuário não encontrado.");
+
             var carrinho = _carrinhoRepo.ObterCarrinhoDoUsuario(usuarioId);
 
+            // Se não tem carrinho, retorna vazio (mas o usuário é válido)
             if (carrinho == null)
             {
-                // Se não tem carrinho, retorna um vazio (melhor que erro 404 neste caso)
                 return new CarrinhoRespostaDTO
                 {
                     UsuarioId = usuarioId,
@@ -81,7 +106,7 @@ namespace ecommerce.Application.Services
                 };
             }
 
-            // Mapeamento manual de Entidade para DTO
+            // Mapeia para DTO
             return new CarrinhoRespostaDTO
             {
                 Id = carrinho.Id,

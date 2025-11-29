@@ -21,21 +21,24 @@ namespace ecommerce.MinhaAPI.Controllers
         {
             try
             {
-                // A mágica do Polimorfismo e Baixa de Estoque acontece lá dentro
-                var pedidoId = _service.FinalizarPedido(dto);
+                var pedido = _service.FinalizarPedido(dto);
 
                 return Ok(new
                 {
                     mensagem = "Pedido realizado com sucesso!",
-                    pedidoId = pedidoId,
-                    status = "Aguardando Processamento"
+                    pedidoId = pedido.Id,
+
+                    // Pegamos o status dinâmico que foi gerado pelo PagamentoPix ou PagamentoCartao
+                    status = pedido.Status,
+
+                    valorTotal = pedido.ValorTotal
                 });
             }
-            catch (InvalidOperationException ex) // Erro de estoque ou carrinho vazio
+            catch (InvalidOperationException ex)
             {
-                return StatusCode(409, new { erro = ex.Message }); // 409 Conflict
+                return StatusCode(409, new { erro = ex.Message });
             }
-            catch (ArgumentException ex) // Erro de validação (ex: cartão inválido)
+            catch (ArgumentException ex)
             {
                 return BadRequest(new { erro = ex.Message });
             }
