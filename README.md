@@ -87,4 +87,7 @@ Para verificar a integridade do sistema, siga esta ordem de execução:
 4.  **Adicionar ao Carrinho:** Use os IDs de usuário e produto.
 5.  **Visualizar Carrinho:** Confirme se o valor total foi calculado corretamente.
 6.  **Finalizar Pedido:** Escolha o método de pagamento ("pix" ou "cartao").
-7.  **Validar Estoque:** Liste os produtos novamente e verifique se o estoque foi debitado automaticamente.
+7.  **Validar Estoque:** Liste os produtos novamente e verifique se o estoque foi debitado automaticamente.           
+
+## 🤳🏻 Vídeo explicativo do projeto
+### https://drive.google.com/file/d/1eTQfiEvMYbJ0MzXz9XSWqYhaHzuikX01/view?usp=sharing
